@@ -471,7 +471,7 @@ def view_altbracket(name):
 #widgets.interact(view_altbracket, name=altname_list);
 
 
-with st.containter():
+with st.container():
   st.header('Current standings', divider='blue')
   choice_group = st.selectbox('Group', group_list)
   current_standing = view_standings(choice_group)
