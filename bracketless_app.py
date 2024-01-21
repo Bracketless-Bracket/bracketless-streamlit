@@ -6,7 +6,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 import requests
 from json import loads
 #import ipywidgets as widgets
@@ -105,7 +105,7 @@ for seed in range(len(seed_list)):
 
 
 # Range of Dates
-print(f'Today is {date.today()}!')
+# print(f'Today is {date.today()}!')
 
 # Dates for start of each round
 date_r64 = date(2023, 3, 16)
@@ -406,14 +406,6 @@ def view_standings(group):
 group_list = ['Overall', 'Goshen', 'Champaign-Urbana', 'Harrisonburg', 'Alternate']
 #widgets.interact(view_standings, group=group_list);
 
-col1, col2, col3 = st.columns(3)
-with col1:
-  st.header('Current standings', divider='blue')
-  choice_group = st.selectbox('Group', group_list)
-  current_standing = view_standings(choice_group)
-  st.dataframe(current_standing, height=38*len(current_standing))
-
-
 # View individual brackets
 def view_bracket(name):
   # Return specific bracket
@@ -478,15 +470,25 @@ def view_altbracket(name):
 
 #widgets.interact(view_altbracket, name=altname_list);
 
+
+with st.containter():
+  st.header('Current standings', divider='blue')
+  choice_group = st.selectbox('Group', group_list)
+  current_standing = view_standings(choice_group)
+  st.dataframe(current_standing, height=40*10)
+
+col2, col3 = st.columns(2)
 with col2:
   # st.header("",divider='rainbow')
   st.header('Individual brackets', divider='rainbow')
   choice_name = st.selectbox('Name', name_list)
   current_name = view_bracket(choice_name)
-  st.dataframe(current_name, hide_index=True, height=38*17)
+  st.dataframe(current_name, hide_index=True, height=40*16)
 
 with col3:
   st.header('Alternate brackets', divider='rainbow')
   choice_name = st.selectbox('Name', altname_list)
   current_name = view_altbracket(choice_name)
-  st.dataframe(current_name, hide_index=True, height=38*17)
+  st.dataframe(current_name, hide_index=True, height=40*16)
+
+st.write("Last Update: ", str(datetime.now().strftime("%H:%M")), " on ", str(date.today()))
