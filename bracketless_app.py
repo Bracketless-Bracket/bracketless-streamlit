@@ -1,6 +1,6 @@
-%%writefile app.py
+# %%writefile app.py
 
-#@title STREAMLIT APP
+# @title STREAMLIT APP
 # Import libraries
 import streamlit as st
 import numpy as np
