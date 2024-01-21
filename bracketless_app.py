@@ -483,12 +483,12 @@ with col2:
   st.header('Individual brackets', divider='rainbow')
   choice_name = st.selectbox('Name', name_list)
   current_name = view_bracket(choice_name)
-  st.dataframe(current_name, hide_index=True, height=40*16)
+  st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
 
 with col3:
   st.header('Alternate brackets', divider='rainbow')
   choice_name = st.selectbox('Name', altname_list)
   current_name = view_altbracket(choice_name)
-  st.dataframe(current_name, hide_index=True, height=40*16)
+  st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
 
 st.write("Last Update: ", str(datetime.now().strftime("%H:%M")), " on ", str(date.today()))
