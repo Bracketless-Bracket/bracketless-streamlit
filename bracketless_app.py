@@ -8,7 +8,7 @@ import pandas as pd
 
 from datetime import date, timedelta
 import requests
-#import json
+from json import loads
 #import ipywidgets as widgets
 
 st.title('BRACKETLESS BRACKET 2024')
@@ -185,7 +185,7 @@ for d in range(len(dates)):
   url = f"http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates={year}{month}{day}"
   page = requests.get(url)
   text = page.text
-  data = json.loads(text)
+  data = loads(text)
 
   # Go through each event that day
   for game in range(len(data.get('events'))):
