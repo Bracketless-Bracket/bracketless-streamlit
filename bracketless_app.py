@@ -475,7 +475,7 @@ with st.container():
   st.header('Current standings', divider='blue')
   choice_group = st.selectbox('Group', group_list)
   current_standing = view_standings(choice_group)
-  st.dataframe(current_standing, height=40*10, use_containter_width=True)
+  st.dataframe(current_standing, height=40*10, use_container_width=True)
 
 col2, col3 = st.columns(2)
 with col2:
