@@ -577,7 +577,7 @@ def view_bracket(name):
   seed_col = np.insert(seed_col, 0, 0)
   combined = pd.DataFrame(data={"Seed":seed_col, "Name":bracket_list,
                                 "Wins":wins_col, "Points":pts_col})#.to_string(index=False)
-  combined.iloc[0,0] = ""
+  # combined.iloc[0,0] = ""
 
   return combined
 
@@ -609,7 +609,7 @@ def view_altbracket(name):
   seed_col = np.insert(seed_col, 0, 0)
   combined = pd.DataFrame(data={"Seed":seed_col, "Name":bracket_list,
                                 "Wins":wins_col, "Points":pts_col})#.to_string(index=False)
-  combined.iloc[0,0] = ""
+  # combined.iloc[0,0] = ""
 
   return combined
 
@@ -620,7 +620,7 @@ with st.container():
   st.header('Current standings', divider='rainbow')
   choice_group = st.selectbox('Group', group_list)
   current_standing = view_standings(choice_group)
-  st.dataframe(current_standing, height=40*11, use_container_width=True)
+  st.dataframe(current_standing, height=40*10, use_container_width=True)
 
 col2, col3 = st.columns(2)
 with col2:
@@ -628,12 +628,12 @@ with col2:
   st.header('Individual brackets', divider='orange')
   choice_name = st.selectbox('Name', name_list)
   current_name = view_bracket(choice_name)
-  st.dataframe(current_name, hide_index=True, height=39*17, use_container_width=True)
+  st.dataframe(current_name, hide_index=True, height=39*16, use_container_width=True)
 
 with col3:
   st.header('Alternate brackets', divider='violet')
   choice_name = st.selectbox('Name', altname_list)
   current_name = view_altbracket(choice_name)
-  st.dataframe(current_name, hide_index=True, height=39*17, use_container_width=True)
+  st.dataframe(current_name, hide_index=True, height=39*16, use_container_width=True)
 
 st.write("Last Update: ", str(datetime.now().strftime("%H:%M")), " on ", str(date.today()))
