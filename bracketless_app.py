@@ -577,7 +577,7 @@ def view_bracket(name):
   seed_col = np.insert(seed_col, 0, 0)
   combined = pd.DataFrame(data={"Seed":seed_col, "Name":bracket_list,
                                 "Wins":wins_col, "Points":pts_col})#.to_string(index=False)
-  # combined.iloc[0,0] = ""
+  combined.iloc[0,0] = ""
 
   return combined
 
@@ -609,7 +609,7 @@ def view_altbracket(name):
   seed_col = np.insert(seed_col, 0, 0)
   combined = pd.DataFrame(data={"Seed":seed_col, "Name":bracket_list,
                                 "Wins":wins_col, "Points":pts_col})#.to_string(index=False)
-  # combined.iloc[0,0] = ""
+  combined.iloc[0,0] = ""
 
   return combined
 
@@ -636,4 +636,5 @@ with col3:
   current_name = view_altbracket(choice_name)
   st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
 
+st.write("Results courtesy [ESPN](%s)" % "https://www.espn.com/")
 st.write("Last Update: ", str(datetime.now().strftime("%H:%M")), " on ", str(date.today()))
