@@ -231,9 +231,9 @@ def get_dates(year):
 def get_entries(year):
   # Download entries
   if year=='2023':
-    url = st.secrets[FormURLs]["url2023"]
+    url = st.secrets["FormURLs"]["url2023"]
   elif year=='2022':
-    url = st.secrets[FormURLs]["url2022"]
+    url = st.secrets["FormURLs"]["url2022"]
       
   entry_df = pd.read_csv(url, skiprows=7, header=0,
                         names=["Name", "Affiliation", "Seed 1", "Seed 2",
