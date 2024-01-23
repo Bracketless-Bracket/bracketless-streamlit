@@ -625,13 +625,13 @@ with st.container():
 col2, col3 = st.columns(2)
 with col2:
   # st.header("",divider='rainbow')
-  st.header('Individual brackets', divider='purple')
+  st.header('Individual brackets', divider='orange')
   choice_name = st.selectbox('Name', name_list)
   current_name = view_bracket(choice_name)
   st.dataframe(current_name, hide_index=True, height=39*17, use_container_width=True)
 
 with col3:
-  st.header('Alternate brackets', divider='orange')
+  st.header('Alternate brackets', divider='violet')
   choice_name = st.selectbox('Name', altname_list)
   current_name = view_altbracket(choice_name)
   st.dataframe(current_name, hide_index=True, height=39*17, use_container_width=True)
