@@ -356,19 +356,19 @@ def get_results(year, dates, round_dates):
           win_name = win_name.replace("Ohio State", "Ohio St.")
 
 
-          # Place winner in correct round based on date
-          if dates[d] < date_r32:
-            winners_list64.append(win_name)
-          elif dates[d] >= date_r32 and dates[d] < date_r16:
-            winners_list32.append(win_name)
-          elif dates[d] >= date_r16 and dates[d] < date_r8:
-            winners_list16.append(win_name)
-          elif dates[d] >= date_r8 and dates[d] < date_r4:
-            winners_list8.append(win_name)
-          elif dates[d] >= date_r4 and dates[d] < date_r2:
-            winners_list4.append(win_name)
-          elif dates[d] >= date_r2 and dates[d] <= date_end:
-            winners_list2.append(win_name)
+        # Place winner in correct round based on date
+        if dates[d] < date_r32:
+          winners_list64.append(win_name)
+        elif dates[d] >= date_r32 and dates[d] < date_r16:
+          winners_list32.append(win_name)
+        elif dates[d] >= date_r16 and dates[d] < date_r8:
+          winners_list16.append(win_name)
+        elif dates[d] >= date_r8 and dates[d] < date_r4:
+          winners_list8.append(win_name)
+        elif dates[d] >= date_r4 and dates[d] < date_r2:
+          winners_list4.append(win_name)
+        elif dates[d] >= date_r2 and dates[d] <= date_end:
+          winners_list2.append(win_name)
 
 
     # Finish putting into dataframe
