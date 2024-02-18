@@ -6,10 +6,11 @@ import numpy as np
 import pandas as pd
 import requests
 from datetime import date, timedelta, datetime
+from zoneinfo import ZoneInfo
 from json import loads
 #import ipywidgets as widgets
 
-st.title('BRACKETLESS BRACKET 2023')
+st.title('BRACKETLESS BRACKET')
 
 year = st.selectbox("Year", ('2024','2023','2022'))
 
