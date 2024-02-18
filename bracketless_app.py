@@ -650,6 +650,6 @@ else:
     st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
   
   st.write("Results courtesy [ESPN](%s)" % "https://www.espn.com/")
-  today = datetime.now(ZoneInfo('America/New_York')
-  st.write("Last Update: ", str(today.month), "/", str(today.day), " at ", str(today.hour), ":", str(today.minute))
+  todays = datetime.now(ZoneInfo('America/New_York'))
+  st.write("Last Update: ", str(todays.month), "/", str(todays.day), " at ", str(todays.hour), ":", str(todays.minute))
   #st.write("Last Update: ", str(datetime.now().strftime("%H:%M")), " on ", str(date.today()))
