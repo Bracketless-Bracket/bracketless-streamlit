@@ -204,7 +204,7 @@ else:
   
   
   def get_dates(year):
-    print(f'Today is {date.today()} at {datetime.now().strftime("%H:%M")}!')
+    #print(f'Today is {date.today()} at {datetime.now().strftime("%H:%M")}!')
     if year=='2023':
       # Range of Dates
       # Dates for start of each round
@@ -650,4 +650,6 @@ else:
     st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
   
   st.write("Results courtesy [ESPN](%s)" % "https://www.espn.com/")
-  st.write("Last Update: ", str(datetime.now().strftime("%H:%M")), " on ", str(date.today()))
+  today = datetime.now(ZoneInfo('America/New_York')
+  st.write("Last Update: ", str(today.month), "/", str(today.day), " at ", str(today.hour), ":", str(today.minute))
+  #st.write("Last Update: ", str(datetime.now().strftime("%H:%M")), " on ", str(date.today()))
