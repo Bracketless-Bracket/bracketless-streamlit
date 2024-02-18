@@ -651,5 +651,5 @@ else:
   
   st.write("Results courtesy [ESPN](%s)" % "https://www.espn.com/")
   todays = datetime.now(ZoneInfo('America/New_York'))
-  st.write("Last Update: ", str(todays.month), "/", str(todays.day), " at ", str(todays.hour), ":", str(todays.minute))
+  st.write("Last Update: ", todays.strftime("%x"), " at ", todays.strftime("%X"))
   #st.write("Last Update: ", str(datetime.now().strftime("%H:%M")), " on ", str(date.today()))
