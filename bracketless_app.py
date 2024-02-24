@@ -15,7 +15,7 @@ st.title('BRACKETLESS BRACKET')
 year = st.selectbox("Year", ('2024','2023','2022'))
 
 if year=='2024':
-  st.write('Coming Soon!')
+  st.write('Coming Soon! The entry form will be available [here](https://forms.gle/qUVBFTcf8KgGtJKt5).')
   if date.today() >= date(2024, 3, 10):
     tourneystart = datetime(2024, 3, 21, 17, 00).astimezone(ZoneInfo('America/New_York'))
   else:
