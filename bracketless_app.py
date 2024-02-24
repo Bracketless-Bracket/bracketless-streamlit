@@ -24,6 +24,53 @@ if year=='2024':
   waitdays = wait.days
   waithours = int(np.floor(wait.seconds/(3600)))
   st.write('The tournament starts in about ', wait.days,' days, ', waithours, ' hours!')
+
+  def get_games():
+      year = '%04d' % datetime.now(ZoneInfo('America/New_York')).year
+      month = '%02d' % datetime.now(ZoneInfo('America/New_York')).month
+      day = '%02d' % datetime.now(ZoneInfo('America/New_York')).day 
+  
+      # Scrape scores from ESPN - better than Sports Reference because it's live!
+      url = f"http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates={year}{month}{day}"
+      page = requests.get(url)
+      text = page.text
+      data = loads(text)
+  
+      matchups = [] 
+      matchups_live = []
+      matchups_upcoming = []
+      matchups_complete = []
+  
+      # Go through each event that day
+      for game in range(len(data.get('events'))):
+        # matchup = data.get('events')[game].get('name')
+        # matchups.append(matchup)
+        # print(data.get('events')[game].get('status').get('type').get('name'))
+  
+        if not data.get('events')[game].get('status').get('type').get('completed'):
+          if data.get('events')[game].get('status').get('type').get('description')=='Scheduled':
+            matchups_upcoming.append(data.get('events')[game].get('name'))
+          else:
+            matchups_live.append(data.get('events')[game].get('name'))
+        else:
+          matchups_complete.append(data.get('events')[game].get('name'))
+      return matchups_live, matchups_upcoming, matchups_complete
+  
+    matchups_live, matchups_upcoming, matchups_complete = get_games()
+  
+    def view_matchups(see):
+      if see=='Live':
+        matchups_df = pd.DataFrame(data={"Live":matchups_live})
+      elif see=='Upcoming':
+        matchups_df = pd.DataFrame(data={"Upcoming":matchups_upcoming})
+      elif see=='Completed':
+        matchups_df = pd.DataFrame(data={"Completed":matchups_complete})
+      return matchups_df
+    matchup_options = ['Live', 'Upcoming', 'Completed']
+    
+    see = st.radio('Today\'s Games', matchup_options)
+    current_matchups = view_matchups(see)
+    st.dataframe(current_matchups, hide_index=True)
   
 else:
   def get_teams(year):
