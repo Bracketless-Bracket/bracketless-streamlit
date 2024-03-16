@@ -396,6 +396,7 @@ else:
           if year=='2024':
             # 2024
             # win_name = win_name.replace()
+            win_name
             
           elif year=='2023':
             # Adjust the name
