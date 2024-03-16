@@ -65,15 +65,15 @@ if year=='2024':
     return matchups_df
   matchup_options = ['Live', 'Upcoming', 'Completed']
 
-  def get_entrants(year):
-    # These are 2023 entries
-    url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRY2W5rB38deW_-u5CN58qVPhD34RAe1nsbAdDCj6SGfryh5k-21Rwyv7vSS3DrEpir_XBFUs29iPfQ/pub?gid=0&single=true&output=csv"
-    entrants_df = pd.read_csv(url, skiprows=7, header=0,
-                          names=["Name"],
-                          usecols=[1])
-    return entrants_df
-  entrants = get_entrants(year)
-  st.write(entrants, hide_index=True)
+  # def get_entrants(year):
+  #   # These are 2023 entries
+  #   url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRY2W5rB38deW_-u5CN58qVPhD34RAe1nsbAdDCj6SGfryh5k-21Rwyv7vSS3DrEpir_XBFUs29iPfQ/pub?gid=0&single=true&output=csv"
+  #   entrants_df = pd.read_csv(url, skiprows=7, header=0,
+  #                         names=["Name"],
+  #                         usecols=[1])
+  #   return entrants_df
+  # entrants = get_entrants(year)
+  # st.write(entrants, hide_index=True)
   
   see = st.radio('Today\'s Games', matchup_options)
   current_matchups = view_matchups(see)
