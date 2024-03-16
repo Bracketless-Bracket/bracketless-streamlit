@@ -304,6 +304,7 @@ else:
     # Download entries
     if year=='2024':
       #url = st.secrets["FormURLs"]["url2024"]
+      url = 0
     elif year=='2023':
       url = st.secrets["FormURLs"]["url2023"]
     elif year=='2022':
