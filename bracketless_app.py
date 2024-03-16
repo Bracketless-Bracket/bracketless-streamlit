@@ -15,7 +15,7 @@ st.title('BRACKETLESS BRACKET')
 year = st.selectbox("Year", ('2024','2023','2022'))
 
 if year=='2024':
-  st.write('Coming Soon! The entry form will be available [here](https://forms.gle/qUVBFTcf8KgGtJKt5).')
+  st.write('Coming Soon! The entry form will be available Sunday after the brackets are announced [here](https://forms.gle/qUVBFTcf8KgGtJKt5).')
   if date.today() >= date(2024, 3, 10):
     tourneystart = datetime(2024, 3, 21, 17, 00).astimezone(ZoneInfo('America/New_York'))
   else:
@@ -249,7 +249,23 @@ else:
   
   def get_dates(year):
     #print(f'Today is {date.today()} at {datetime.now().strftime("%H:%M")}!')
-    if year=='2023':
+    if year=='2024':
+      # Range of Dates
+      # Dates for start of each round
+      date_r64 = date(2024, 3, 21)
+      date_r32 = date(2024, 3, 23)
+      date_r16 = date(2024, 3, 28)
+      date_r8 = date(2024, 3, 30)
+      date_r4 = date(2024, 4, 4)
+      date_r2 = date(2024, 4, 6)
+      date_end = date_r2 + timedelta(days=1)
+  
+      # Create list of dates spanning whole tournament
+      dates = [date_r64 + timedelta(days=n)
+              for n in range((date_end-date_r64).days)]
+      round_dates = [date_r64, date_r32, date_r16, date_r8, date_r4, date_r2, date_end]
+    
+    elif year=='2023':
       # Range of Dates
       # Dates for start of each round
       date_r64 = date(2023, 3, 16)
@@ -275,7 +291,6 @@ else:
       date_r4 = date(2022, 4, 2)
       date_r2 = date(2022, 4, 4)
       date_end = date_r2 + timedelta(days=1)
-      # date_end = date_r32
   
       # Create list of dates spanning whole tournament
       dates = [date_r64 + timedelta(days=n)
@@ -287,7 +302,9 @@ else:
   @st.cache_data(ttl=3600)
   def get_entries(year):
     # Download entries
-    if year=='2023':
+    if year=='2024':
+      #url = st.secrets["FormURLs"]["url2024"]
+    elif year=='2023':
       url = st.secrets["FormURLs"]["url2023"]
     elif year=='2022':
       url = st.secrets["FormURLs"]["url2022"]
@@ -314,6 +331,8 @@ else:
   
     # Any clean up
     # Drop duplicates by row number
+    if year=='2024':
+      entryc2_df = entry_df    
     if year=='2023':
       entryc2_df = entry_df
     elif year=='2022':
@@ -338,7 +357,6 @@ else:
   def get_results(year, dates, round_dates):
     date_r64, date_r32, date_r16, date_r8, date_r4, date_r2, date_end = round_dates
   
-    
     # Scrape results
     # Create blank lists outside of loop
     winners_list64 = []
@@ -374,7 +392,11 @@ else:
           elif data.get('events')[game].get('competitions')[0].get('competitors')[1].get('winner'):
             win_name = data.get('events')[game].get('competitions')[0].get('competitors')[1].get('team').get('shortDisplayName')
       
-          if year=='2023':
+          if year=='2024':
+            # 2024
+            # win_name = win_name.replace()
+            
+          elif year=='2023':
             # Adjust the name
             # 2023
             win_name = win_name.replace("Arizona St", "Arizona St. / Nevada")
