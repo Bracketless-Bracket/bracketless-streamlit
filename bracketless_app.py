@@ -65,14 +65,17 @@ if year=='2024':
     return matchups_df
   matchup_options = ['Live', 'Upcoming', 'Completed']
 
-  # def get_entrants(year):
-  #   url = st.secrets["FormURLs"]["url2024"]
-  #   entrants_df = pd.read_csv(url, skiprows=7, header=0,
-  #                         names=["Current Entries"],
-  #                         usecols=[1])
-  #   return entrants_df
-  # entrants = get_entrants(year)
-  # st.dataframe(entrants, hide_index=True)
+  def get_entrants(year):
+    url = st.secrets["FormURLs"]["url2024"]
+    entrants_df = pd.read_csv(url, skiprows=7, header=0,
+                              names=["Name"],
+                              usecols=[1]).sort_values(by=["Name"])
+    return entrants_df
+
+  check = st.checkbox('Was my entry received?')
+  if check:
+    entrants = get_entrants(year)
+    st.dataframe(entrants, hide_index=True)
   
   see = st.radio('Today\'s Games', matchup_options)
   current_matchups = view_matchups(see)
