@@ -80,183 +80,19 @@ if year=='2024':
   
   see = st.radio('Today\'s Games', matchup_options)
   current_matchups = view_matchups(see)
-  st.dataframe(current_matchups, hide_index=True)
+  st.dataframe(current_matchups, hide_index=True, use_container_width = True)
   
 # Standings Page
 else:
   def get_teams(year):
-    if year=='2024':
-      url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSr4KwdEzYPzj2hgc0WUW26t4hrbHXlkVk7oGyrL0m01AQ1A_7nvcKYNTka9gftwWyUd9kEOXTFouPV/pub?gid=0&single=true&output=csv"
-      team_list_df = pd.read_csv(url)
+    url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSr4KwdEzYPzj2hgc0WUW26t4hrbHXlkVk7oGyrL0m01AQ1A_7nvcKYNTka9gftwWyUd9kEOXTFouPV/pub?gid=0&single=true&output=csv"
+    team_list_df = pd.read_csv(url)
+    if year=='2024': 
       team_list = team_list_df["Teams2024"].to_list()
-    
     elif year=='2023':
-      # Teams
-      team_list = [
-          "Alabama",
-          "Houston",
-          "Kansas",
-          "Purdue",
-  
-          "UCLA",
-          "Texas",
-          "Arizona",
-          "Marquette",
-  
-          "Baylor",
-          "Gonzaga",
-          "Kansas St.",
-          "Xavier",
-  
-          "UConn",
-          "Tennessee",
-          "Indiana",
-          "Virginia",
-  
-          "San Diego St.",
-          "Duke",
-          "Saint Mary's",
-          "Miami",
-  
-          "Iowa St.",
-          "Creighton",
-          "Kentucky",
-          "TCU",
-  
-          "Texas A&M",
-          "Michigan St.",
-          "Missouri",
-          "Northwestern",
-  
-          "Memphis",
-          "Arkansas",
-          "Maryland",
-          "Iowa",
-  
-          # 9 Seeds
-          "Florida Atlantic",
-          "West Virginia",
-          "Auburn",
-          "Illinois",
-  
-          "Boise St.",
-          "Penn St.",
-          "USC",
-          "Utah St.",
-  
-          "NC State",
-          "Providence",
-          "Mississippi St. / Pittsburgh",
-          "Arizona St. / Nevada",
-  
-          "Charleston",
-          "Oral Roberts",
-          "Drake",
-          "VCU",
-  
-          "Kent St.",
-          "Iona",
-          "Furman",
-          "Louisiana",
-  
-          "Kennesaw St.",
-          "UCSB",
-          "Grand Canyon",
-          "Montana St.",
-  
-          "Vermont",
-          "Colgate",
-          "Princeton",
-          "UNC-Asheville",
-  
-          "Northern Kentucky",
-          "Howard",
-          "Texas A&M-CC / SE Missouri St.",
-          "Texas Southern / Fairleigh Dickinson"
-      ]
+      team_list = team_list_df["Teams2023"].to_list()
     elif year=='2022':
-      team_list = [
-          "Gonzaga",
-          "Arizona",
-          "Kansas",
-          "Baylor",
-  
-          "Auburn",
-          "Kentucky",
-          "Villanova",
-          "Duke",
-  
-          "Wisconsin",
-          "Tennessee",
-          "Purdue",
-          "Texas Tech",
-  
-          "UCLA",
-          "Illinois",
-          "Providence",
-          "Arkansas",
-  
-          "UConn",
-          "Houston",
-          "Saint Mary's",
-          "Iowa",
-  
-          "Alabama",
-          "LSU",
-          "Texas",
-          "Colorado St.",
-  
-          "USC",
-          "Murray St.",
-          "Michigan St.",
-          "Ohio St.",
-  
-          "Boise St.",
-          "North Carolina",
-          "San Diego St.",
-          "Seton Hall",
-  
-          # 9 Seeds
-          "Creighton",
-          "TCU",
-          "Marquette",
-          "Memphis",
-  
-          "San Francisco",
-          "Miami (FL)",
-          "Loyola Chicago",
-          "Davidson",
-  
-          "Iowa St.",
-          "Michigan",
-          "Rutgers / Notre Dame",
-          "Virginia Tech", # Note: placed in seed order, not s-curve order
-  
-          "Wyoming / Indiana",
-          "UAB",
-          "Richmond",
-          "New Mexico St.",
-  
-          "Chattanooga",
-          "South Dakota St.",
-          "Vermont",
-          "Akron",
-  
-          "Longwood",
-          "Yale",
-          "Colgate",
-          "Montana St.",
-  
-          "Delaware",
-          "Saint Peter's",
-          "Jacksonville St.",
-          "Cal St. Fullerton",
-  
-          "Georgia St.",
-          "Norfolk St.",
-          "Wright St. / Bryant",
-          "Texas Southern / Texas A&M-CC"
-      ]
+      team_list = team_list_df["Teams2022"].to_list()
   
     # Seed (assumes entered in S-Curve order)
     seed_list = np.zeros(len(team_list), dtype="int")
@@ -278,12 +114,7 @@ else:
       date_r4 = date(2024, 4, 4)
       date_r2 = date(2024, 4, 6)
       date_end = date_r2 + timedelta(days=1)
-  
-      # Create list of dates spanning whole tournament
-      dates = [date_r64 + timedelta(days=n)
-              for n in range((date_end-date_r64).days)]
-      round_dates = [date_r64, date_r32, date_r16, date_r8, date_r4, date_r2, date_end]
-    
+      
     elif year=='2023':
       # Range of Dates
       # Dates for start of each round
@@ -294,13 +125,7 @@ else:
       date_r4 = date(2023, 4, 1)
       date_r2 = date(2023, 4, 3)
       date_end = date_r2 + timedelta(days=1)
-      # date_end = date_r32
-  
-      # Create list of dates spanning whole tournament
-      dates = [date_r64 + timedelta(days=n)
-              for n in range((date_end-date_r64).days)]
-      round_dates = [date_r64, date_r32, date_r16, date_r8, date_r4, date_r2, date_end]
-  
+      
     elif year=='2022':
       # Dates for start of each round
       date_r64 = date(2022, 3, 17)
@@ -311,10 +136,10 @@ else:
       date_r2 = date(2022, 4, 4)
       date_end = date_r2 + timedelta(days=1)
   
-      # Create list of dates spanning whole tournament
-      dates = [date_r64 + timedelta(days=n)
-              for n in range((date_end-date_r64).days)]
-      round_dates = [date_r64, date_r32, date_r16, date_r8, date_r4, date_r2, date_end]
+    # Create list of dates spanning whole tournament
+    dates = [date_r64 + timedelta(days=n)
+            for n in range((date_end-date_r64).days)]
+    round_dates = [date_r64, date_r32, date_r16, date_r8, date_r4, date_r2, date_end]
   
     return dates, round_dates
   
@@ -322,8 +147,8 @@ else:
   def get_entries(year):
     # Download entries
     if year=='2024':
+      # url = 0
       url = st.secrets["FormURLs"]["url2024"]
-      #url = 0
     elif year=='2023':
       url = st.secrets["FormURLs"]["url2023"]
     elif year=='2022':
@@ -781,7 +606,7 @@ else:
 
     see = st.radio('Today\'s Games', matchup_options)
     current_matchups = view_matchups(see)
-    st.dataframe(current_matchups, hide_index=True)
+    st.dataframe(current_matchups, hide_index=True, use_container_width = True)
   
   st.write("Results courtesy [ESPN](%s)" % "https://www.espn.com/")
   todays = datetime.now(ZoneInfo('America/New_York'))
