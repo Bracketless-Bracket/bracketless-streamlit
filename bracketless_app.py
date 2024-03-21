@@ -467,7 +467,7 @@ else:
   
     return standings
   
-  group_list = ['Overall', 'Goshen', 'Champaign-Urbana', 'Harrisonburg']
+  group_list = ['Overall', 'Goshen', 'Champaign-Urbana', 'Harrisonburg', 'Alternate']
   #widgets.interact(view_standings, group=group_list);
   
   # View individual brackets
