@@ -14,6 +14,7 @@ st.title('BRACKETLESS BRACKET')
 
 year = st.selectbox("Year", ('2024','2023','2022'))
 
+# Countdown / Entry Form Page
 if year=='2024':
   st.write('The entry form is live [here](https://forms.gle/qUVBFTcf8KgGtJKt5)!')
   if date.today() >= date(2024, 3, 10):
@@ -81,9 +82,15 @@ if year=='2024':
   current_matchups = view_matchups(see)
   st.dataframe(current_matchups, hide_index=True)
   
+# Standings Page
 else:
   def get_teams(year):
-    if year=='2023':
+    if year=='2024':
+      url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSr4KwdEzYPzj2hgc0WUW26t4hrbHXlkVk7oGyrL0m01AQ1A_7nvcKYNTka9gftwWyUd9kEOXTFouPV/pub?gid=0&single=true&output=csv"
+      team_list_df = pd.read_csv(url)
+      team_list = team_list_df["Teams2024"].to_list()
+    
+    elif year=='2023':
       # Teams
       team_list = [
           "Alabama",
@@ -315,8 +322,8 @@ else:
   def get_entries(year):
     # Download entries
     if year=='2024':
-      #url = st.secrets["FormURLs"]["url2024"]
-      url = 0
+      url = st.secrets["FormURLs"]["url2024"]
+      #url = 0
     elif year=='2023':
       url = st.secrets["FormURLs"]["url2023"]
     elif year=='2022':
@@ -346,7 +353,7 @@ else:
     # Drop duplicates by row number
     if year=='2024':
       entryc2_df = entry_df    
-    if year=='2023':
+    elif year=='2023':
       entryc2_df = entry_df
     elif year=='2022':
       entryc2_df = entry_df.drop(4)
@@ -406,9 +413,10 @@ else:
             win_name = data.get('events')[game].get('competitions')[0].get('competitors')[1].get('team').get('shortDisplayName')
       
           if year=='2024':
-            # 2024
-            # win_name = win_name.replace()
-            win_name
+            win_name = win_name.replace("Colorado", "Boise St / Colorado")
+            win_name = win_name.replace("Colorado St", "Virginia / Colorado St")
+            win_name = win_name.replace("Grambling", "Montana St / Grambling")
+            win_name = win_name.replace("Wagner", "Howard / Wagner")
             
           elif year=='2023':
             # Adjust the name
@@ -433,16 +441,9 @@ else:
           
           elif year=='2022':
             # 2022
-            # if day=='18':
-              # print(win_name)
-            # win_name = win_name.replace("St. Peter's", "Saint Peter's")
-            # win_name = win_name.replace("UNC", "North Carolina")
-            # win_name = win_name.replace("New Mexico State", "New Mexico St.")
             win_name = win_name.replace("New Mexico St", "New Mexico St.")
-  
             win_name = win_name.replace("Miami", "Miami (FL)")
             win_name = win_name.replace("Murray St", "Murray St.")
-  
             win_name = win_name.replace("Iowa State", "Iowa St.")
             win_name = win_name.replace("Michigan St", "Michigan St.")
             win_name = win_name.replace("Notre Dame", "Rutgers / Notre Dame")
@@ -641,7 +642,7 @@ else:
   
     return standings
   
-  group_list = ['Overall', 'Goshen', 'Champaign-Urbana', 'Harrisonburg', 'Alternate']
+  group_list = ['Overall', 'Goshen', 'Champaign-Urbana', 'Harrisonburg']
   #widgets.interact(view_standings, group=group_list);
   
   # View individual brackets
@@ -728,6 +729,59 @@ else:
     choice_name = st.selectbox('Name', altname_list)
     current_name = view_altbracket(choice_name)
     st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
+  
+  game_check = st.checkbox('See Today\'s Matchups?')
+  if game_check:
+    def get_games():
+      year = '%04d' % datetime.now(ZoneInfo('America/New_York')).year
+      month = '%02d' % datetime.now(ZoneInfo('America/New_York')).month
+      day = '%02d' % datetime.now(ZoneInfo('America/New_York')).day
+
+      # Scrape scores from ESPN - better than Sports Reference because it's live!
+      # url = f"http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates=20240210"
+      url = f"http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates={year}{month}{day}"
+      page = requests.get(url)
+      text = page.text
+      data = loads(text)
+
+      matchups = []
+      matchups_live = []
+      matchups_upcoming = []
+      matchups_complete = []
+
+      # Go through each event that day
+      for game in range(len(data.get('events'))):
+        # matchup = data.get('events')[game].get('name')
+        # matchups.append(matchup)
+        # print(data.get('events')[game].get('status').get('type').get('name'))
+
+        if not data.get('events')[game].get('status').get('type').get('completed'):
+          if data.get('events')[game].get('status').get('type').get('description')=='Scheduled':
+            matchups_upcoming.append(data.get('events')[game].get('name'))
+          else:
+            matchups_live.append(data.get('events')[game].get('name'))
+        else:
+          matchups_complete.append(data.get('events')[game].get('name'))
+      # print(matchups_live)
+      # print(matchups_upcoming)
+      # print(matchups_complete)
+      return matchups_live, matchups_upcoming, matchups_complete
+
+    def view_matchups(see):
+      if see=='Live':
+        matchups_df = pd.DataFrame(data={"Live":matchups_live})
+      elif see=='Upcoming':
+        matchups_df = pd.DataFrame(data={"Upcoming":matchups_upcoming})
+      elif see=='Completed':
+        matchups_df = pd.DataFrame(data={"Completed":matchups_complete})
+      return matchups_df
+    
+    matchups_live, matchups_upcoming, matchups_complete = get_games()
+    matchup_options = ['Live', 'Upcoming', 'Completed']
+
+    see = st.radio('Today\'s Games', matchup_options)
+    current_matchups = view_matchups(see)
+    st.dataframe(current_matchups, hide_index=True)
   
   st.write("Results courtesy [ESPN](%s)" % "https://www.espn.com/")
   todays = datetime.now(ZoneInfo('America/New_York'))
