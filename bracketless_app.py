@@ -143,7 +143,7 @@ else:
   
     return dates, round_dates
   
-  @st.cache_data(ttl=3600)
+  @st.cache_data(ttl=60)
   def get_entries(year):
     # Download entries
     if year=='2024':
