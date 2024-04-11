@@ -143,7 +143,7 @@ else:
   
     return dates, round_dates
   
-  @st.cache_data(ttl=60)
+  @st.cache_data(ttl=3600) # Update every hour
   def get_entries(year):
     # Download entries
     if year=='2024':
@@ -198,7 +198,7 @@ else:
     altname_list = altentry2_df.loc[:, 'Name'].sort_values().tolist()
     return entryc2_df, altentry2_df, name_list, altname_list
   
-  @st.cache_data(ttl=60)
+  @st.cache_data(ttl=3600) # Change when tourney begins; update every minute
   def get_results(year, dates, round_dates):
     date_r64, date_r32, date_r16, date_r8, date_r4, date_r2, date_end = round_dates
   
