@@ -111,8 +111,8 @@ else:
       date_r32 = date(2024, 3, 23)
       date_r16 = date(2024, 3, 28)
       date_r8 = date(2024, 3, 30)
-      date_r4 = date(2024, 4, 4)
-      date_r2 = date(2024, 4, 6)
+      date_r4 = date(2024, 4, 6)
+      date_r2 = date(2024, 4, 8)
       date_end = date_r2 + timedelta(days=1)
       
     elif year=='2023':
