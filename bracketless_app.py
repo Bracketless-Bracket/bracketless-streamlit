@@ -12,15 +12,16 @@ from json import loads
 
 st.title('BRACKETLESS BRACKET')
 
-year = st.selectbox("Year", ('2024','2023','2022'))
+// To update each year: add new year
+year = st.selectbox("Year", ('2025','2024','2023','2022'))
 
 # Countdown / Entry Form Page
 if year=='2025':
   st.write('The entry form is live [here](https://forms.gle/qUVBFTcf8KgGtJKt5)!')
-  if date.today() >= date(2024, 3, 10):
-    tourneystart = datetime(2024, 3, 21, 17, 00).astimezone(ZoneInfo('America/New_York'))
+  if date.today() >= date(2024, 3, 9): // Daylight savings time
+    tourneystart = datetime(2024, 3, 20, 17, 00).astimezone(ZoneInfo('America/New_York'))
   else:
-    tourneystart = datetime(2024, 3, 21, 16, 00).astimezone(ZoneInfo('America/New_York'))
+    tourneystart = datetime(2024, 3, 20, 16, 00).astimezone(ZoneInfo('America/New_York'))
   wait = tourneystart - datetime.now(ZoneInfo('America/New_York'))
   waitdays = wait.days
   waithours = int(np.floor(wait.seconds/(3600)))
