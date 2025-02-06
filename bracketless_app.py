@@ -17,11 +17,12 @@ year = st.selectbox("Year", ('2025','2024','2023','2022'))
 
 # Countdown / Entry Form Page
 if year=='2025':
+  st.write('The entry form is coming soon!')
   st.write('The entry form is live [here](https://forms.gle/qUVBFTcf8KgGtJKt5)!')
-  if date.today() >= date(2024, 3, 9): # After daylight savings time
-    tourneystart = datetime(2024, 3, 20, 17, 00).astimezone(ZoneInfo('America/New_York'))
+  if date.today() >= date(2025, 3, 9): # After daylight savings time
+    tourneystart = datetime(2025, 3, 20, 17, 00).astimezone(ZoneInfo('America/New_York'))
   else:
-    tourneystart = datetime(2024, 3, 20, 16, 00).astimezone(ZoneInfo('America/New_York'))
+    tourneystart = datetime(2025, 3, 20, 16, 00).astimezone(ZoneInfo('America/New_York'))
   wait = tourneystart - datetime.now(ZoneInfo('America/New_York'))
   waitdays = wait.days
   waithours = int(np.floor(wait.seconds/(3600)))
