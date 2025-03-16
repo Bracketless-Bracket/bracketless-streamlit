@@ -111,7 +111,7 @@ else:
   
   def get_dates(year):
     #print(f'Today is {date.today()} at {datetime.now().strftime("%H:%M")}!')
-    // TO UPDATE EACH YEAR: Dates
+    # TO UPDATE EACH YEAR: Dates
     if year=='2024':
       # Range of Dates
       # Dates for start of each round
