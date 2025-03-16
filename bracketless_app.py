@@ -12,10 +12,11 @@ from json import loads
 
 st.title('BRACKETLESS BRACKET')
 
-# To update each year: add new year
+# TO UPDATE EACH YEAR: add new year, update dates
 year = st.selectbox("Year", ('2025','2024','2023','2022'))
 
 # Countdown / Entry Form Page
+# TO UPDATE: When tournament starts, change this to next year
 if year=='2025':
   st.write('The entry form is coming soon!')
   # st.write('The entry form is live [here](https://forms.gle/qUVBFTcf8KgGtJKt5)!')
@@ -69,7 +70,8 @@ if year=='2025':
   matchup_options = ['Live', 'Upcoming', 'Completed']
 
   def get_entrants(year):
-    url = st.secrets["FormURLs"]["url2024"]
+    # TO UPDATE EACH YEAR: Form of entries
+    url = st.secrets["FormURLs"]["url2025"]
     entrants_df = pd.read_csv(url, skiprows=7, header=0,
                               names=["Name"],
                               usecols=[1]).sort_values(by=["Name"])
@@ -84,12 +86,15 @@ if year=='2025':
   current_matchups = view_matchups(see)
   st.dataframe(current_matchups, hide_index=True, use_container_width = True)
   
-# Standings Page
+# STANDINGS PAGE FOR SELECTED YEAR (INCLUDING CURRENT)
 else:
   def get_teams(year):
     url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSr4KwdEzYPzj2hgc0WUW26t4hrbHXlkVk7oGyrL0m01AQ1A_7nvcKYNTka9gftwWyUd9kEOXTFouPV/pub?gid=0&single=true&output=csv"
     team_list_df = pd.read_csv(url)
-    if year=='2024': 
+    # TO UPDATE EACH YEAR: TEAM LIST
+    if year=='2025':
+      team_list = team_list_df["Teams2025"].to_list()
+    elif year=='2024': 
       team_list = team_list_df["Teams2024"].to_list()
     elif year=='2023':
       team_list = team_list_df["Teams2023"].to_list()
@@ -106,7 +111,19 @@ else:
   
   def get_dates(year):
     #print(f'Today is {date.today()} at {datetime.now().strftime("%H:%M")}!')
+    // TO UPDATE EACH YEAR: Dates
     if year=='2024':
+      # Range of Dates
+      # Dates for start of each round
+      date_r64 = date(2025, 3, 20)
+      date_r32 = date(2025, 3, 22)
+      date_r16 = date(2025, 3, 27)
+      date_r8 = date(2025, 3, 29)
+      date_r4 = date(2025, 4, 5)
+      date_r2 = date(2025, 4, 7)
+      date_end = date_r2 + timedelta(days=1)
+      
+    elif year=='2024':
       # Range of Dates
       # Dates for start of each round
       date_r64 = date(2024, 3, 21)
@@ -147,9 +164,11 @@ else:
   
   @st.cache_data(ttl=3600) # Update every hour
   def get_entries(year):
-    # Download entries
-    if year=='2024':
+    # TO UPDATE EACH YEAR: Download entries
+    if year=='2025':
       # url = 0
+      url = st.secrets["FormURLs"]["url2025"]
+    if year=='2024':
       url = st.secrets["FormURLs"]["url2024"]
     elif year=='2023':
       url = st.secrets["FormURLs"]["url2023"]
@@ -176,9 +195,12 @@ else:
                                     7, 8, 9, 10, 11, 12,
                                     13, 14, 15, 16, 17, 18])
   
+    # TO UPDATE EACH YEAR
     # Any clean up
     # Drop duplicates by row number
-    if year=='2024':
+    if year=='2025':
+      entryc2_df = entry_df    
+    elif year=='2024':
       entryc2_df = entry_df    
     elif year=='2023':
       entryc2_df = entry_df
@@ -239,7 +261,14 @@ else:
           elif data.get('events')[game].get('competitions')[0].get('competitors')[1].get('winner'):
             win_name = data.get('events')[game].get('competitions')[0].get('competitors')[1].get('team').get('shortDisplayName')
       
-          if year=='2024':
+          # TO UPDATE EACH YEAR: First-four winners
+          if year=='2025':
+            # win_name = win_name.replace("Colorado", "Boise St / Colorado")
+            # win_name = win_name.replace("Colorado St", "Virginia / Colorado St")
+            # win_name = win_name.replace("Grambling", "Montana St / Grambling")
+            # win_name = win_name.replace("Wagner", "Howard / Wagner")
+            
+          elif year=='2024':
             win_name = win_name.replace("Colorado", "Boise St / Colorado")
             win_name = win_name.replace("Colorado St", "Virginia / Colorado St")
             win_name = win_name.replace("Grambling", "Montana St / Grambling")
