@@ -263,10 +263,10 @@ else:
       
           # TO UPDATE EACH YEAR: First-four winners
           if year=='2025':
-            # win_name = win_name.replace("Colorado", "Boise St / Colorado")
-            # win_name = win_name.replace("Colorado St", "Virginia / Colorado St")
-            # win_name = win_name.replace("Grambling", "Montana St / Grambling")
-            # win_name = win_name.replace("Wagner", "Howard / Wagner")
+            win_name = win_name.replace("Texas", "Texas / Xavier")
+            win_name = win_name.replace("San Diego St", "San Diego St / North Carolina")
+            win_name = win_name.replace("Alabama St", "Alabama St / Saint Francis U")
+            win_name = win_name.replace("American", "American / Mount St. Mary's")
             
           elif year=='2024':
             win_name = win_name.replace("Colorado", "Boise St / Colorado")
