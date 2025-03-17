@@ -77,7 +77,7 @@ if year=='2025':
                               usecols=[1]).sort_values(by=["Name"])
     return entrants_df
 
-  check = st.checkbox('Was my entry received?')
+  check = st.checkbox('Was my entry received? (Updates hourly)')
   if check:
     entrants = get_entrants(year)
     st.dataframe(entrants, hide_index=True)
