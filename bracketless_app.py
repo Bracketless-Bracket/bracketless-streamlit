@@ -112,7 +112,7 @@ else:
   def get_dates(year):
     #print(f'Today is {date.today()} at {datetime.now().strftime("%H:%M")}!')
     # TO UPDATE EACH YEAR: Dates
-    if year=='2024':
+    if year=='2025':
       # Range of Dates
       # Dates for start of each round
       date_r64 = date(2025, 3, 20)
@@ -263,10 +263,11 @@ else:
       
           # TO UPDATE EACH YEAR: First-four winners
           if year=='2025':
+            win_name = win_name.replace("SIUE", "SIU Edwardsville")
             win_name = win_name.replace("Texas", "Texas / Xavier")
             win_name = win_name.replace("San Diego St", "San Diego St / North Carolina")
-            win_name = win_name.replace("Alabama St", "Alabama St / Saint Francis U")
-            win_name = win_name.replace("American", "American / Mount St. Mary's")
+            win_name = win_name.replace("Alabama St", "Alabama St / St Francis Pa")
+            win_name = win_name.replace("American", "American / Mount St Marys")
             
           elif year=='2024':
             win_name = win_name.replace("Colorado", "Boise St / Colorado")
