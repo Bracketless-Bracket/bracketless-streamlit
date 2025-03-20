@@ -264,10 +264,10 @@ else:
           # TO UPDATE EACH YEAR: First-four winners
           if year=='2025':
             win_name = win_name.replace("SIUE", "SIU Edwardsville")
-            win_name = win_name.replace("Texas", "Texas / Xavier")
-            win_name = win_name.replace("San Diego St", "San Diego St / North Carolina")
+            win_name = win_name.replace("Xavier", "Texas / Xavier")
+            win_name = win_name.replace("North Carolina", "San Diego St / North Carolina")
             win_name = win_name.replace("Alabama St", "Alabama St / St Francis Pa")
-            win_name = win_name.replace("American", "American / Mount St Marys")
+            win_name = win_name.replace("Mount St Marys", "American / Mount St Marys")
             
           elif year=='2024':
             win_name = win_name.replace("Colorado", "Boise St / Colorado")
