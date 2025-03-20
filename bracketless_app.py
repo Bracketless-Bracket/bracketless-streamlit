@@ -578,8 +578,8 @@ else:
     # st.header("",divider='rainbow')
     st.header('Individual brackets', divider='orange')
     # rand_initial = np.random.randint(0, np.size(name_list))
-    choice_name = st.selectbox('Name', name_list, index=None)
-    # choice_name = st.selectbox('Name', name_list)
+    # choice_name = st.selectbox('Name', name_list, index=rand_initial)
+    choice_name = st.selectbox('Name', name_list)
     current_name = view_bracket(choice_name)
     st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
   
