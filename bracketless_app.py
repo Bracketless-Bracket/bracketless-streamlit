@@ -579,15 +579,16 @@ else:
     st.header('Individual brackets', divider='orange')
     if year=='2022':
       if 'rand_num1' not in st.session_state:
+        # rand_initial = np.random.randint(0, np.size(name_list))
+        # choice_name = st.selectbox('Name', name_list, index=rand_initial)
+        
         st.session_state['rand_num1'] = np.random.randint(0, np.size(name_list))
         rand_initial = st.session_state['rand_num1']
         choice_name = st.selectbox('Name', name_list, index=rand_initial)
       else:
-        choice_name = st.selectbox('Name', name_list)
+        choice_name = st.selectbox('Name', name_list, index=rand_initial)
       current_name = view_bracket(choice_name)
     else:
-      # rand_initial = np.random.randint(0, np.size(name_list))
-      # choice_name = st.selectbox('Name', name_list, index=rand_initial)
       choice_name = st.selectbox('Name', name_list)
       current_name = view_bracket(choice_name)
       
