@@ -600,7 +600,15 @@ else:
   
   with col3:
     st.header('Alternate brackets', divider='violet')
-    choice_name = st.selectbox('Name', altname_list)
+    if 'rand_num2' not in st.session_state:
+      st.session_state['rand_num2'] = np.random.randint(0, np.size(altname_list))
+      rand_initial2 = st.session_state['rand_num2']
+      choice_name = st.selectbox('Name', altname_list, index=rand_initial2)
+    else:
+      rand_initial2 = st.session_state['rand_num2']
+      choice_name = st.selectbox('Name', altname_list, index=rand_initial2)
+    
+    # choice_name = st.selectbox('Name', altname_list)
     current_name = view_altbracket(choice_name)
     st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
   
