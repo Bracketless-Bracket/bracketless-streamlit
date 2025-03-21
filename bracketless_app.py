@@ -577,21 +577,24 @@ else:
   with col2:
     # st.header("",divider='rainbow')
     st.header('Individual brackets', divider='orange')
-    if year=='2022':
-      if 'rand_num1' not in st.session_state:
-        # rand_initial = np.random.randint(0, np.size(name_list))
-        # choice_name = st.selectbox('Name', name_list, index=rand_initial)
-        
-        st.session_state['rand_num1'] = np.random.randint(0, np.size(name_list))
-        rand_initial = st.session_state['rand_num1']
-        choice_name = st.selectbox('Name', name_list, index=rand_initial)
-      else:
-        rand_initial = st.session_state['rand_num1']
-        choice_name = st.selectbox('Name', name_list, index=rand_initial)
-      current_name = view_bracket(choice_name)
+    # if year=='2022': # For testing purposes
+    # Randomize the start of the list
+    if 'rand_num1' not in st.session_state:
+      # rand_initial = np.random.randint(0, np.size(name_list))
+      # choice_name = st.selectbox('Name', name_list, index=rand_initial)
+      
+      st.session_state['rand_num1'] = np.random.randint(0, np.size(name_list))
+      rand_initial = st.session_state['rand_num1']
+      choice_name = st.selectbox('Name', name_list, index=rand_initial)
     else:
-      choice_name = st.selectbox('Name', name_list)
-      current_name = view_bracket(choice_name)
+      rand_initial = st.session_state['rand_num1']
+      choice_name = st.selectbox('Name', name_list, index=rand_initial)
+    
+    current_name = view_bracket(choice_name)
+    
+    # else:
+    # choice_name = st.selectbox('Name', name_list)
+    # current_name = view_bracket(choice_name)
       
     st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
   
