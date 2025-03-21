@@ -584,12 +584,15 @@ else:
       # choice_name = st.selectbox('Name', name_list, index=rand_initial)
       
       st.session_state['rand_num1'] = np.random.randint(0, np.size(name_list))
-      rand_initial = st.session_state['rand_num1']
-      choice_name = st.selectbox('Name', name_list, index=rand_initial)
-    else:
-      rand_initial = st.session_state['rand_num1']
-      choice_name = st.selectbox('Name', name_list, index=rand_initial)
+      # rand_initial = st.session_state['rand_num1']
+      # choice_name = st.selectbox('Name', name_list, index=rand_initial)
     
+    # else:
+    elif rand_initial > np.size(name_list):
+      rand_initial = np.size(name_list)
+      
+    rand_initial = st.session_state['rand_num1']
+    choice_name = st.selectbox('Name', name_list, index=rand_initial)
     current_name = view_bracket(choice_name)
     
     # else:
