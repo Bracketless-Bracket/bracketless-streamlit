@@ -676,7 +676,7 @@ else:
     rand_initial = st.session_state['rand_num1']
     # Catch potential problem switching between years
     if rand_initial > np.size(name_list):
-      rand_initial = np.size(name_list)
+      rand_initial = 1 # np.size(name_list)
       
     choice_name = st.selectbox('Name', name_list, index=rand_initial)
     current_name = view_bracket(choice_name)
