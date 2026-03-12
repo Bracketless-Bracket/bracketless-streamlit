@@ -114,19 +114,18 @@ else:
   def get_dates(year):
     #print(f'Today is {date.today()} at {datetime.now().strftime("%H:%M")}!')
     # TO UPDATE EACH YEAR: Dates
-    if year=='2025':
+    if year=='2026':
       # Range of Dates
       # Dates for start of each round
-      date_r64 = date(2025, 3, 19)
-      date_r32 = date(2025, 3, 21)
-      date_r16 = date(2025, 3, 26)
-      date_r8 = date(2025, 3, 28)
-      date_r4 = date(2025, 4, 4)
-      date_r2 = date(2025, 4, 6)
+      date_r64 = date(2026, 3, 19)
+      date_r32 = date(2026, 3, 21)
+      date_r16 = date(2026, 3, 26)
+      date_r8 = date(2026, 3, 28)
+      date_r4 = date(2026, 4, 4)
+      date_r2 = date(2026, 4, 6)
       date_end = date_r2 + timedelta(days=1)
     
     elif year=='2025':
-      # Range of Dates
       # Dates for start of each round
       date_r64 = date(2025, 3, 20)
       date_r32 = date(2025, 3, 22)
@@ -137,7 +136,6 @@ else:
       date_end = date_r2 + timedelta(days=1)
       
     elif year=='2024':
-      # Range of Dates
       # Dates for start of each round
       date_r64 = date(2024, 3, 21)
       date_r32 = date(2024, 3, 23)
@@ -148,7 +146,6 @@ else:
       date_end = date_r2 + timedelta(days=1)
       
     elif year=='2023':
-      # Range of Dates
       # Dates for start of each round
       date_r64 = date(2023, 3, 16)
       date_r32 = date(2023, 3, 18)
@@ -428,6 +425,10 @@ else:
                                   "R64": wins_list[:,0], "R32": wins_list[:,1],
                                   "R16": wins_list[:,2], "R8": wins_list[:,3],
                                   "R4": wins_list[:,4], "R2": wins_list[:,5]})
+      if year=='2021':
+        # Oregon advanced over VCU by forefit
+        team_df.loc[team_df['Team']=='Oregon', 'Total Points'] = 320
+      
     return team_df
   
   def setup_alt_brackets(team_df, altentry2_df, entryc2_df):
