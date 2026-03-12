@@ -13,17 +13,17 @@ from json import loads
 st.title('BRACKETLESS BRACKET')
 
 # TO UPDATE EACH YEAR: add new year, update dates
-year = st.selectbox("Year", ('2025','2024','2023','2022'))
+year = st.selectbox("Year", ('2026','2025','2024','2023','2022'))
 
 # Countdown / Entry Form Page
 # TO UPDATE: When tournament starts, change this to next year
 if year=='2026':
   # st.write('The entry form is coming soon!')
   st.write('The entry form is live [here](https://forms.gle/KFMU2NFERRVyx8Pp9)!')
-  if date.today() >= date(2025, 3, 9): # After daylight savings time
-    tourneystart = datetime(2025, 3, 20, 17, 00).astimezone(ZoneInfo('America/New_York'))
+  if date.today() >= date(2026, 3, 8): # After daylight savings time
+    tourneystart = datetime(2026, 3, 19, 17, 00).astimezone(ZoneInfo('America/New_York'))
   else:
-    tourneystart = datetime(2025, 3, 20, 16, 00).astimezone(ZoneInfo('America/New_York'))
+    tourneystart = datetime(2026, 3, 19, 16, 00).astimezone(ZoneInfo('America/New_York'))
   wait = tourneystart - datetime.now(ZoneInfo('America/New_York'))
   waitdays = wait.days
   waithours = int(np.floor(wait.seconds/(3600)))
@@ -115,6 +115,17 @@ else:
     if year=='2025':
       # Range of Dates
       # Dates for start of each round
+      date_r64 = date(2025, 3, 19)
+      date_r32 = date(2025, 3, 21)
+      date_r16 = date(2025, 3, 26)
+      date_r8 = date(2025, 3, 28)
+      date_r4 = date(2025, 4, 4)
+      date_r2 = date(2025, 4, 6)
+      date_end = date_r2 + timedelta(days=1)
+    
+    elif year=='2025':
+      # Range of Dates
+      # Dates for start of each round
       date_r64 = date(2025, 3, 20)
       date_r32 = date(2025, 3, 22)
       date_r16 = date(2025, 3, 27)
@@ -165,10 +176,13 @@ else:
   @st.cache_data(ttl=3600) # Update every hour
   def get_entries(year):
     # TO UPDATE EACH YEAR: Download entries
-    if year=='2025':
+    if year=='2026':
+      # url = 0
+      url = st.secrets["FormURLs"]["url2026"]
+    elif year=='2025':
       # url = 0
       url = st.secrets["FormURLs"]["url2025"]
-    if year=='2024':
+    elif year=='2024':
       url = st.secrets["FormURLs"]["url2024"]
     elif year=='2023':
       url = st.secrets["FormURLs"]["url2023"]
