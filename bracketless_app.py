@@ -78,9 +78,9 @@ if year=='2026':
     return entrants_df
 
   # check = st.checkbox('Was my entry received? (Updates hourly)')
-  if check:
-    entrants = get_entrants(year)
-    st.dataframe(entrants, hide_index=True)
+  # if check:
+  #   entrants = get_entrants(year)
+  #   st.dataframe(entrants, hide_index=True)
   
   see = st.radio('Today\'s Games', matchup_options)
   current_matchups = view_matchups(see)
