@@ -13,7 +13,7 @@ from json import loads
 st.title('BRACKETLESS BRACKET')
 
 # TO UPDATE EACH YEAR: add new year, update dates
-year = st.selectbox("Year", ('2026','2025','2024','2023','2022'))
+year = st.selectbox("Year", ('2026','2025','2024','2023','2022','2021'))
 
 # Countdown / Entry Form Page
 # TO UPDATE: When tournament starts, change this to next year
@@ -100,6 +100,8 @@ else:
       team_list = team_list_df["Teams2023"].to_list()
     elif year=='2022':
       team_list = team_list_df["Teams2022"].to_list()
+    elif year=='2021':
+      team_list = team_list_df["Teams2021"].to_list()
   
     # Seed (assumes entered in S-Curve order)
     seed_list = np.zeros(len(team_list), dtype="int")
@@ -165,6 +167,16 @@ else:
       date_r4 = date(2022, 4, 2)
       date_r2 = date(2022, 4, 4)
       date_end = date_r2 + timedelta(days=1)
+
+    elif year=='2021':
+      # Dates for start of each round
+      date_r64 = date(2021, 3, 19)
+      date_r32 = date(2021, 3, 21)
+      date_r16 = date(2021, 3, 27)
+      date_r8 = date(2021, 3, 29)
+      date_r4 = date(2021, 4, 3)
+      date_r2 = date(2021, 4, 5)
+      date_end = date_r2 + timedelta(days=1)
   
     # Create list of dates spanning whole tournament
     dates = [date_r64 + timedelta(days=n)
@@ -180,7 +192,6 @@ else:
       # url = 0
       url = st.secrets["FormURLs"]["url2026"]
     elif year=='2025':
-      # url = 0
       url = st.secrets["FormURLs"]["url2025"]
     elif year=='2024':
       url = st.secrets["FormURLs"]["url2024"]
@@ -188,6 +199,8 @@ else:
       url = st.secrets["FormURLs"]["url2023"]
     elif year=='2022':
       url = st.secrets["FormURLs"]["url2022"]
+    elif year=='2021':
+      url = st.secrets["FormURLs"]["url2021"]
         
     entry_df = pd.read_csv(url, skiprows=7, header=0,
                           names=["Name", "Affiliation", "Seed 1", "Seed 2",
@@ -220,6 +233,8 @@ else:
       entryc2_df = entry_df
     elif year=='2022':
       entryc2_df = entry_df.drop(4)
+    elif year=='2021':
+      entryc2_df = entry_df
     
     altentry2_df = altentry_df
     altentry2_df.loc[:,"Affiliation"] = "Alternate"
@@ -319,6 +334,24 @@ else:
             win_name = win_name.replace("Michigan St", "Michigan St.")
             win_name = win_name.replace("Notre Dame", "Rutgers / Notre Dame")
             win_name = win_name.replace("Ohio State", "Ohio St.")
+
+          if year=='2021':
+            win_name = win_name.replace("Abilene Chrstn", "Abilene Christian")
+            win_name = win_name.replace("Santa Barbara", "UCSB")
+            win_name = win_name.replace("St Bonaventure", "St. Bonaventure")
+            win_name = win_name.replace("E Washington", "Eastern Washington")
+            win_name = win_name.replace("Florida St", "Florida St.")
+            win_name = win_name.replace("Morehead St", "Morehead St.")
+            win_name = win_name.replace("San Diego St", "San Diego St.")
+            win_name = win_name.replace("Cleveland St", "Cleveland St.")
+            win_name = win_name.replace("Oklahoma St", "Oklahoma St.")
+            win_name = win_name.replace("Oregon St", "Oregon St.")
+            win_name = win_name.replace("Ohio State", "Ohio St.")
+            win_name = win_name.replace("Utah State", "Utah St.")
+            win_name = win_name.replace("UCLA", "Michigan St. / UCLA")
+            win_name = win_name.replace("Drake", "Wichita St. / Drake")
+            win_name = win_name.replace("Texas Southern", "Mount St. Mary's / Texas Southern")
+            win_name = win_name.replace("Norfolk St", "Norfolk St. / Appalachian St.")
   
   
           # Place winner in correct round based on date
