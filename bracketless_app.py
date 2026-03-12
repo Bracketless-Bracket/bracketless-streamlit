@@ -13,7 +13,7 @@ from json import loads
 st.title('BRACKETLESS BRACKET')
 
 # TO UPDATE EACH YEAR: add new year, update dates
-year = st.selectbox("Year", ('2026','2025','2024','2023','2022','2021'))
+year = st.selectbox("Year", ('2026','2025','2024','2023','2022','2021,'2019'))
 
 # Countdown / Entry Form Page
 # TO UPDATE: When tournament starts, change this to next year
@@ -102,6 +102,8 @@ else:
       team_list = team_list_df["Teams2022"].to_list()
     elif year=='2021':
       team_list = team_list_df["Teams2021"].to_list()
+    elif year=='2019':
+      team_list = team_list_df["Teams2019"].to_list()
   
     # Seed (assumes entered in S-Curve order)
     seed_list = np.zeros(len(team_list), dtype="int")
@@ -174,6 +176,16 @@ else:
       date_r4 = date(2021, 4, 3)
       date_r2 = date(2021, 4, 5)
       date_end = date_r2 + timedelta(days=1)
+
+    elif year=='2019':
+      # Dates for start of each round
+      date_r64 = date(2019, 3, 21)
+      date_r32 = date(2019, 3, 23)
+      date_r16 = date(2019, 3, 28)
+      date_r8 = date(2019, 3, 30)
+      date_r4 = date(2019, 4, 6)
+      date_r2 = date(2019, 4, 8)
+      date_end = date_r2 + timedelta(days=1)
   
     # Create list of dates spanning whole tournament
     dates = [date_r64 + timedelta(days=n)
@@ -198,6 +210,8 @@ else:
       url = st.secrets["FormURLs"]["url2022"]
     elif year=='2021':
       url = st.secrets["FormURLs"]["url2021"]
+    elif year=='2019':
+      url = st.secrets["FormURLs"]["url2019"]
         
     entry_df = pd.read_csv(url, skiprows=7, header=0,
                           names=["Name", "Affiliation", "Seed 1", "Seed 2",
@@ -231,6 +245,8 @@ else:
     elif year=='2022':
       entryc2_df = entry_df.drop(4)
     elif year=='2021':
+      entryc2_df = entry_df
+    elif year=='2019':
       entryc2_df = entry_df
     
     altentry2_df = altentry_df
@@ -288,7 +304,14 @@ else:
             win_name = data.get('events')[game].get('competitions')[0].get('competitors')[1].get('team').get('shortDisplayName')
       
           # TO UPDATE EACH YEAR: First-four winners
-          if year=='2025':
+          if year=='2026':
+            win_name = 0
+            # win_name = win_name.replace("Xavier", "Texas / Xavier")
+            # win_name = win_name.replace("North Carolina", "San Diego St / North Carolina")
+            # win_name = win_name.replace("Alabama St", "Alabama St / St Francis Pa")
+            # win_name = win_name.replace("Mount St Marys", "American / Mount St Marys")
+            
+          elif year=='2025':
             win_name = win_name.replace("SIUE", "SIU Edwardsville")
             win_name = win_name.replace("Xavier", "Texas / Xavier")
             win_name = win_name.replace("North Carolina", "San Diego St / North Carolina")
@@ -332,7 +355,7 @@ else:
             win_name = win_name.replace("Notre Dame", "Rutgers / Notre Dame")
             win_name = win_name.replace("Ohio State", "Ohio St.")
 
-          if year=='2021':
+          elif year=='2021':
             win_name = win_name.replace("Abilene Chrstn", "Abilene Christian")
             win_name = win_name.replace("Santa Barbara", "UCSB")
             win_name = win_name.replace("St Bonaventure", "St. Bonaventure")
@@ -349,6 +372,23 @@ else:
             win_name = win_name.replace("Drake", "Wichita St. / Drake")
             win_name = win_name.replace("Texas Southern", "Mount St. Mary's / Texas Southern")
             win_name = win_name.replace("Norfolk St", "Norfolk St. / Appalachian St.")
+
+          elif year=='2019':
+            win_name = win_name.replace("Ohio State", "Ohio St.")
+            win_name = win_name.replace("Mississippi St", "Mississippi St.")
+            win_name = win_name.replace("Georgia St", "Georgia State")
+            win_name = win_name.replace("Kansas St", "Kansas St.")
+            win_name = win_name.replace("N Kentucky", "Northern Kentucky")
+            win_name = win_name.replace("Saint Mary's", "St. Mary's (Calif.)")
+            win_name = win_name.replace("Abilene Chrstn", "Abilene Christian")
+            win_name = win_name.replace("Murray St", "Murray State")
+            win_name = win_name.replace("Michigan St", "Michigan St.")
+            win_name = win_name.replace("Florida St", "Florida St.")
+            win_name = win_name.replace("New Mexico St", "New Mexico St.")
+            win_name = win_name.replace("Belmont", "Belmont / Temple")
+            win_name = win_name.replace("Arizona St", "Arizona St. / St. John's")
+            win_name = win_name.replace("FDU", "Farleigh Dickinson / Prairie View A&M")
+            win_name = win_name.replace("N Dakota St", "North Dakota St. / NC Central")
   
   
           # Place winner in correct round based on date
