@@ -18,8 +18,8 @@ year = st.selectbox("Year", ('2026','2025','2024','2023','2022'))
 # Countdown / Entry Form Page
 # TO UPDATE: When tournament starts, change this to next year
 if year=='2026':
-  # st.write('The entry form is coming soon!')
-  st.write('The entry form is live [here](https://forms.gle/KFMU2NFERRVyx8Pp9)!')
+  st.write('The entry form is coming soon!')
+  # st.write('The entry form is live [here](https://forms.gle/KFMU2NFERRVyx8Pp9)!')
   if date.today() >= date(2026, 3, 8): # After daylight savings time
     tourneystart = datetime(2026, 3, 19, 17, 00).astimezone(ZoneInfo('America/New_York'))
   else:
