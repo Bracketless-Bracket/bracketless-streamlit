@@ -18,8 +18,8 @@ year = st.selectbox("Year", ('2026','2025','2024','2023','2022','2021','2019'))
 # Countdown / Entry Form Page
 # TO UPDATE: When tournament starts, change this to next year
 if year=='2026':
-  st.write('The entry form is coming soon!') # Also uncomment st.checkbox code (ln 80)
-  # st.write('The entry form is live [here](https://forms.gle/KFMU2NFERRVyx8Pp9)!')
+  # st.write('The entry form is coming soon!') # Also uncomment st.checkbox code (ln 80)
+  st.write('The entry form is live [here](https://forms.gle/Y8YAKi4VyEgSdwDh6)!')
   if date.today() >= date(2026, 3, 8): # After daylight savings time
     tourneystart = datetime(2026, 3, 19, 17, 00).astimezone(ZoneInfo('America/New_York'))
   else:
@@ -77,10 +77,10 @@ if year=='2026':
                               usecols=[1]).sort_values(by=["Name"])
     return entrants_df
 
-  # check = st.checkbox('Was my entry received? (Updates hourly)')
-  # if check:
-  #   entrants = get_entrants(year)
-  #   st.dataframe(entrants, hide_index=True)
+  check = st.checkbox('Was my entry received? (Updates hourly)')
+  if check:
+    entrants = get_entrants(year)
+    st.dataframe(entrants, hide_index=True)
   
   see = st.radio('Today\'s Games', matchup_options)
   current_matchups = view_matchups(see)
@@ -92,7 +92,9 @@ else:
     url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSr4KwdEzYPzj2hgc0WUW26t4hrbHXlkVk7oGyrL0m01AQ1A_7nvcKYNTka9gftwWyUd9kEOXTFouPV/pub?gid=0&single=true&output=csv"
     team_list_df = pd.read_csv(url)
     # TO UPDATE EACH YEAR: TEAM LIST
-    if year=='2025':
+    if year=='2026':
+      team_list = team_list_df["Teams2026"].to_list()
+    elif year=='2025':
       team_list = team_list_df["Teams2025"].to_list()
     elif year=='2024': 
       team_list = team_list_df["Teams2024"].to_list()
