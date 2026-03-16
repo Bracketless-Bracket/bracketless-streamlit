@@ -72,7 +72,7 @@ if year=='2026':
   def get_entrants(year):
     # TO UPDATE EACH YEAR: Form of entries
     url = st.secrets["FormURLs"]["url2026"]
-    entrants_df = pd.read_csv(url, skiprows=0, header=0,
+    entrants_df = pd.read_csv(url, skiprows=7, header=0,
                               names=["Name"],
                               usecols=[1]).sort_values(by=["Name"])
     return entrants_df
