@@ -196,7 +196,7 @@ else:
   
     return dates, round_dates
   
-  @st.cache_data(ttl=5) # Update every hour
+  @st.cache_data(ttl=3600) # Update every hour
   def get_entries(year):
     # TO UPDATE EACH YEAR: Download entries
     if year=='2026':
