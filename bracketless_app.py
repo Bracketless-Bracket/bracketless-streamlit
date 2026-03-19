@@ -13,7 +13,7 @@ from json import loads
 st.title('BRACKETLESS BRACKET')
 
 # TO UPDATE EACH YEAR: add new year, update dates
-year = st.selectbox("Year", ('2026','2025','2024','2023','2022','2021','2019'))
+year = st.selectbox("Year", ('2027','2026','2025','2024','2023','2022','2021','2019'))
 
 # Countdown / Entry Form Page
 # TO UPDATE: When tournament starts, change this to next year
