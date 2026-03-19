@@ -94,6 +94,7 @@ else:
     # TO UPDATE EACH YEAR: TEAM LIST
     if year=='2026':
       team_list = team_list_df["Teams2026"].to_list()
+      print(team_list)
     elif year=='2025':
       team_list = team_list_df["Teams2025"].to_list()
     elif year=='2024': 
