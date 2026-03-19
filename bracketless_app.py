@@ -13,7 +13,7 @@ from json import loads
 st.title('BRACKETLESS BRACKET')
 
 # TO UPDATE EACH YEAR: add new year, update dates
-year = st.selectbox("Year", ('2027','2026','2025','2024','2023','2022','2021','2019'))
+year = st.selectbox("Year", ('2026','2025','2024','2023','2022','2021','2019'))
 
 # Countdown / Entry Form Page
 # TO UPDATE: When tournament starts, change this to next year
@@ -469,9 +469,9 @@ else:
                                   "R64": wins_list[:,0], "R32": wins_list[:,1],
                                   "R16": wins_list[:,2], "R8": wins_list[:,3],
                                   "R4": wins_list[:,4], "R2": wins_list[:,5]})
-      # if year=='2021':
-      #   # Oregon advanced over VCU by forefit
-      #   team_df.loc[team_df['Team']=='Oregon', 'Total Points'] = 320
+      if year=='2021':
+        # Oregon advanced over VCU by forefit
+        team_df.loc[team_df['Team']=='Oregon', 'Total Points'] = 320
       
     return team_df
   
