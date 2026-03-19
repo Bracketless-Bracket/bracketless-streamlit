@@ -17,7 +17,7 @@ year = st.selectbox("Year", ('2026','2025','2024','2023','2022','2021','2019'))
 
 # Countdown / Entry Form Page
 # TO UPDATE: When tournament starts, change this to next year
-if year=='2026':
+if year=='2027':
   # st.write('The entry form is coming soon!') # Also uncomment st.checkbox code (ln 80)
   st.write('The entry form is live [here](https://forms.gle/Y8YAKi4VyEgSdwDh6)!')
   if date.today() >= date(2026, 3, 8): # After daylight savings time
@@ -238,7 +238,9 @@ else:
     # TO UPDATE EACH YEAR
     # Any clean up
     # Drop duplicates by row number
-    if year=='2025':
+    if year=='2026':
+      entryc2_df = entry_df    
+    elif year=='2025':
       entryc2_df = entry_df    
     elif year=='2024':
       entryc2_df = entry_df    
@@ -307,11 +309,11 @@ else:
       
           # TO UPDATE EACH YEAR: First-four winners
           if year=='2026':
-            win_name = 0
-            # win_name = win_name.replace("Xavier", "Texas / Xavier")
-            # win_name = win_name.replace("North Carolina", "San Diego St / North Carolina")
-            # win_name = win_name.replace("Alabama St", "Alabama St / St Francis Pa")
-            # win_name = win_name.replace("Mount St Marys", "American / Mount St Marys")
+            # win_name = 0
+            win_name = win_name.replace("Texas", "Texas / NC State")
+            win_name = win_name.replace("Miami OH", "Miami OH / SMU")
+            win_name = win_name.replace("Howard", "UMBC / Howard")
+            win_name = win_name.replace("Prairie View A&M", "Prairie View A&M / Lehigh")
             
           elif year=='2025':
             win_name = win_name.replace("SIUE", "SIU Edwardsville")
