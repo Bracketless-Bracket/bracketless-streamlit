@@ -94,7 +94,7 @@ else:
     # TO UPDATE EACH YEAR: TEAM LIST
     if year=='2026':
       team_list = team_list_df["Teams2026"].to_list()
-      print(team_list)
+      # print(team_list)
     elif year=='2025':
       team_list = team_list_df["Teams2025"].to_list()
     elif year=='2024': 
@@ -469,9 +469,9 @@ else:
                                   "R64": wins_list[:,0], "R32": wins_list[:,1],
                                   "R16": wins_list[:,2], "R8": wins_list[:,3],
                                   "R4": wins_list[:,4], "R2": wins_list[:,5]})
-      if year=='2021':
-        # Oregon advanced over VCU by forefit
-        team_df.loc[team_df['Team']=='Oregon', 'Total Points'] = 320
+      # if year=='2021':
+      #   # Oregon advanced over VCU by forefit
+      #   team_df.loc[team_df['Team']=='Oregon', 'Total Points'] = 320
       
     return team_df
   
