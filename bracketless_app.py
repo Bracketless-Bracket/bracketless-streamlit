@@ -310,10 +310,10 @@ else:
           # TO UPDATE EACH YEAR: First-four winners
           if year=='2026':
             # win_name = 0
-            win_name = win_name.replace("Texas", "Texas / NC State")
-            win_name = win_name.replace("Miami OH", "Miami OH / SMU")
-            win_name = win_name.replace("Howard", "UMBC / Howard")
-            win_name = win_name.replace("Prairie View A&M", "Prairie View A&M / Lehigh")
+            win_name = win_name.replace("Texas / NC State", "Texas")
+            win_name = win_name.replace("Miami OH / SMU", "Miami OH")
+            win_name = win_name.replace("UMBC / Howard", "Howard")
+            win_name = win_name.replace("Prairie View A&M / Lehigh", "Prairie View A&M")
             
           elif year=='2025':
             win_name = win_name.replace("SIUE", "SIU Edwardsville")
