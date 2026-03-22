@@ -310,10 +310,10 @@ else:
           # TO UPDATE EACH YEAR: First-four winners
           if year=='2026':
             # win_name = 0
-            win_name = win_name.replace("Texas A&M", "abc123") // Quick fix
+            win_name = win_name.replace("Texas A&M", "abc123") # Quick fix
             win_name = win_name.replace("Texas Tech", "def456")
             
-            win_name = win_name.replace("Texas", "Texas / NC State") // This was causing issues w/ the above two
+            win_name = win_name.replace("Texas", "Texas / NC State") # This was causing issues w/ the above two
             win_name = win_name.replace("Miami OH", "Miami OH / SMU")
             win_name = win_name.replace("Howard", "UMBC / Howard")
             win_name = win_name.replace("Prairie View A&M", "Prairie View A&M / Lehigh")
