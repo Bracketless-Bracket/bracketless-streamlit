@@ -310,10 +310,16 @@ else:
           # TO UPDATE EACH YEAR: First-four winners
           if year=='2026':
             # win_name = 0
-            win_name = win_name.replace("Texas / NC State", "Texas")
-            win_name = win_name.replace("Miami OH / SMU", "Miami OH")
-            win_name = win_name.replace("UMBC / Howard", "Howard")
-            win_name = win_name.replace("Prairie View A&M / Lehigh", "Prairie View A&M")
+            win_name = win_name.replace("Texas A&M", "abc123") // Quick fix
+            win_name = win_name.replace("Texas Tech", "def456")
+            
+            win_name = win_name.replace("Texas", "Texas / NC State") // This was causing issues w/ the above two
+            win_name = win_name.replace("Miami OH", "Miami OH / SMU")
+            win_name = win_name.replace("Howard", "UMBC / Howard")
+            win_name = win_name.replace("Prairie View A&M", "Prairie View A&M / Lehigh")
+
+            win_name = win_name.replace("abc123", "Texas A&M")
+            win_name = win_name.replace("def456", "Texas Tech")
             
           elif year=='2025':
             win_name = win_name.replace("SIUE", "SIU Edwardsville")
