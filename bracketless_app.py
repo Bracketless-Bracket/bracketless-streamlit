@@ -330,7 +330,7 @@ else:
             elim_name = elim_name.replace("Texas", "Texas / NC State") # This was causing issues w/ the above two
             elim_name = elim_name.replace("Miami OH", "Miami OH / SMU")
             elim_name = elim_name.replace("Howard", "UMBC / Howard")
-            elim_name = elim_name.replace("Prairie View A&M", "Prairie View A&M / Lehigh")
+            elim_name = elim_name.replace("Prairie View", "Prairie View A&M / Lehigh")
             elim_name = elim_name.replace("Long Island", "LIU")
 
             elim_name = elim_name.replace("abc123", "Texas A&M")
