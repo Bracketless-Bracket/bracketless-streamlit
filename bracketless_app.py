@@ -331,6 +331,7 @@ else:
             elim_name = elim_name.replace("Miami OH", "Miami OH / SMU")
             elim_name = elim_name.replace("Howard", "UMBC / Howard")
             elim_name = elim_name.replace("Prairie View A&M", "Prairie View A&M / Lehigh")
+            elim_name = elim_name.replace("Long Island", "LIU")
 
             elim_name = elim_name.replace("abc123", "Texas A&M")
             elim_name = elim_name.replace("def456", "Texas Tech")
