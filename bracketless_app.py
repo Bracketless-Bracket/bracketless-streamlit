@@ -622,7 +622,7 @@ else:
   # View individual brackets
   def elim_bkgnd(row): 
     if row["Name"] in elim_list:
-      return ["background-color: #ffc2c2"]*len(row) # Style eliminated teams as light red
+      return ["background-color: #ffc2c2; text-decoration: line-through"]*len(row) # Style eliminated teams as light red
     else:
       return [""]*len(row)
       
