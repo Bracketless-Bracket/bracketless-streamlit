@@ -84,7 +84,7 @@ if year=='2027':
   
   see = st.radio('Today\'s Games', matchup_options)
   current_matchups = view_matchups(see)
-  st.dataframe(current_matchups, hide_index=True, use_container_width = True)
+  st.dataframe(current_matchups, hide_index=True, width='stretch')
   
 # STANDINGS PAGE FOR SELECTED YEAR (INCLUDING CURRENT)
 else:
@@ -280,6 +280,7 @@ else:
     winners_list8 = []
     winners_list4 = []
     winners_list2 = []
+    elim_list = []
   
     for d in range(len(dates)):
   
@@ -304,8 +305,10 @@ else:
           # Compare the two for the winner
           if data.get('events')[game].get('competitions')[0].get('competitors')[0].get('winner'):
             win_name = data.get('events')[game].get('competitions')[0].get('competitors')[0].get('team').get('shortDisplayName')
+            elim_name = data.get('events')[game].get('competitions')[0].get('competitors')[1].get('team').get('shortDisplayName')
           elif data.get('events')[game].get('competitions')[0].get('competitors')[1].get('winner'):
             win_name = data.get('events')[game].get('competitions')[0].get('competitors')[1].get('team').get('shortDisplayName')
+            elim_name = data.get('events')[game].get('competitions')[0].get('competitors')[0].get('team').get('shortDisplayName')
       
           # TO UPDATE EACH YEAR: First-four winners
           if year=='2026':
@@ -320,6 +323,17 @@ else:
 
             win_name = win_name.replace("abc123", "Texas A&M")
             win_name = win_name.replace("def456", "Texas Tech")
+
+            elim_name = elim_name.replace("Texas A&M", "abc123") # Quick fix
+            elim_name = elim_name.replace("Texas Tech", "def456")
+            
+            elim_name = elim_name.replace("Texas", "Texas / NC State") # This was causing issues w/ the above two
+            elim_name = elim_name.replace("Miami OH", "Miami OH / SMU")
+            elim_name = elim_name.replace("Howard", "UMBC / Howard")
+            elim_name = elim_name.replace("Prairie View A&M", "Prairie View A&M / Lehigh")
+
+            elim_name = elim_name.replace("abc123", "Texas A&M")
+            elim_name = elim_name.replace("def456", "Texas Tech")
             
           elif year=='2025':
             win_name = win_name.replace("SIUE", "SIU Edwardsville")
@@ -414,6 +428,10 @@ else:
             winners_list4.append(win_name)
           elif dates[d] >= date_r2 and dates[d] <= date_end:
             winners_list2.append(win_name)
+          
+          if dates[d] >= date_r64:
+            elim_list.append(elim_name)
+        
   
   
       # Finish putting into dataframe
@@ -479,7 +497,7 @@ else:
         # Oregon advanced over VCU by forefit
         team_df.loc[team_df['Team']=='Oregon', 'Total Points'] = 320
       
-    return team_df
+    return team_df, elim_list
   
   def setup_alt_brackets(team_df, altentry2_df, entryc2_df):
     # Calculate best, worst, most popular, least popular
@@ -563,7 +581,7 @@ else:
   entryc2_df, altentry2_df, name_list, altname_list = get_entries(year)
   
   # Results
-  team_df = get_results(year, dates, round_dates)
+  team_df, elim_list = get_results(year, dates, round_dates)
   
   
   # Calculations
@@ -601,6 +619,12 @@ else:
   #widgets.interact(view_standings, group=group_list);
   
   # View individual brackets
+  def elim_bkgnd(row): 
+    if row["Name"] in elim_list:
+      return ["background-color: #ffc2c2"]*len(row) # Style eliminated teams as light red
+    else:
+      return [""]*len(row)
+      
   def view_bracket(name):
     # Return specific bracket
     bracket = name
@@ -627,8 +651,9 @@ else:
     combined = pd.DataFrame(data={"Seed":seed_col, "Name":bracket_list,
                                   "Wins":wins_col, "Points":pts_col})#.to_string(index=False)
     combined.iloc[0,0] = ""
+    style_combined = combined.style.apply(elim_bkgnd, axis=1)
   
-    return combined
+    return style_combined
   
   #widgets.interact(view_bracket, name=name_list);
   
@@ -659,8 +684,9 @@ else:
     combined = pd.DataFrame(data={"Seed":seed_col, "Name":bracket_list,
                                   "Wins":wins_col, "Points":pts_col})#.to_string(index=False)
     combined.iloc[0,0] = ""
+    style_combined = combined.style.apply(elim_bkgnd, axis=1)
   
-    return combined
+    return style_combined
   
   #widgets.interact(view_altbracket, name=altname_list);
   
@@ -669,7 +695,7 @@ else:
     st.header('Current standings', divider='rainbow')
     choice_group = st.selectbox('Group', group_list)
     current_standing = view_standings(choice_group)
-    st.dataframe(current_standing, height=40*10, use_container_width=True)
+    st.dataframe(current_standing, height=40*10, width='stretch')
   
   col2, col3 = st.columns(2)
   with col2:
@@ -695,7 +721,7 @@ else:
     # choice_name = st.selectbox('Name', name_list)
     # current_name = view_bracket(choice_name)
       
-    st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
+    st.dataframe(current_name, hide_index=True, height=40*16, width='stretch')
   
   with col3:
     st.header('Alternate brackets', divider='violet')
@@ -709,7 +735,7 @@ else:
     choice_name = st.selectbox('Name', altname_list, index=rand_initial2)
     current_name = view_altbracket(choice_name)
     # choice_name = st.selectbox('Name', altname_list)
-    st.dataframe(current_name, hide_index=True, height=40*16, use_container_width=True)
+    st.dataframe(current_name, hide_index=True, height=40*16, width='stretch')
   
   game_check = st.checkbox('See Today\'s Matchups?')
   if game_check:
@@ -762,7 +788,7 @@ else:
 
     see = st.radio('Today\'s Games', matchup_options)
     current_matchups = view_matchups(see)
-    st.dataframe(current_matchups, hide_index=True, use_container_width = True)
+    st.dataframe(current_matchups, hide_index=True, width='stretch')
   
   st.write("Results courtesy [ESPN](%s)" % "https://www.espn.com/")
   todays = datetime.now(ZoneInfo('America/New_York'))
