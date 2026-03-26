@@ -660,8 +660,7 @@ else:
   # View individual brackets
   def elim_bkgnd(row): 
     if row.name == 0:
-      # return ["font-weight: bold"]*len(row)
-      return ["font-style: italic"]*len(row)
+      return ["font-weight: bold"]*len(row)
     if row["Name"] in elim_list:
       return ["background-color: #ffc2c2; text-decoration: line-through"]*len(row) # Style eliminated teams as light red
     else:
