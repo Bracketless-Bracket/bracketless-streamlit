@@ -571,7 +571,7 @@ else:
       avg_sum = avg + avg_sum
     altentry2_df.loc[12, "Points"] = round(avg_sum)
   
-    return entryc2_df, altentry2_df
+    return entryc2_df, altentry2_df, avg_sum
   
   
   
@@ -587,13 +587,45 @@ else:
   
   # Calculations
   altentry2_df = setup_alt_brackets(team_df, altentry2_df, entryc2_df)
-  entryc2_df, altentry2_df = calculate_pts(entryc2_df, seed_list, team_df, altentry2_df)
+  entryc2_df, altentry2_df, avg_sum = calculate_pts(entryc2_df, seed_list, team_df, altentry2_df)
+
+  # Custom color gradient mapping
+  def color_gradient(val, low, mean, high, low_color, mid_color, high_color):
+      # Convert hex colors to RGB tuples
+      def hex_to_rgb(hex_color):
+          hex_color = hex_color.lstrip("#")
+          return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+      
+      low_rgb = hex_to_rgb(low_color)
+      mid_rgb = hex_to_rgb(mid_color)
+      high_rgb = hex_to_rgb(high_color)
+      
+      # Interpolate between low→mid or mid→high depending on value
+      if val <= mean:
+          t = (val - low) / (mean - low) if mean != low else 0
+          r, g, b = [int(low_rgb[i] + t * (mid_rgb[i] - low_rgb[i])) for i in range(3)]
+      else:
+          t = (val - mean) / (high - mean) if high != mean else 1
+          r, g, b = [int(mid_rgb[i] + t * (high_rgb[i] - mid_rgb[i])) for i in range(3)]
+  
+      # Calculate relative luminance and pick text color
+      luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+      text_color = "white" if luminance < 0.5 else "black"
+      
+      return f"background-color: rgb({r}, {g}, {b}); color: {text_color}"
+
+  # Color entire row
+  def color_gradient_row(row, low, mean, high, low_color, mid_color, high_color):
+      color = color_gradient(row['Points'], low, mean, high, low_color, mid_color, high_color)
+      return [color] * len(row)
+
+
   
   # View standings
   def view_standings(group):
     # # This all works:
     # Return names and points in a sorted list (also hides the index column)
-    print(group)
+    # print(group)
   
     if group=='Overall':
       standings = entryc2_df.sort_values(by=["Points"], ascending=False,
@@ -613,8 +645,14 @@ else:
                                                                                ascending=False,
                                                                                ignore_index=True)[["Name", "Points"]]#.to_string(index=False)
       standings.index += 1
-  
-    return standings
+    
+    styled_standings = standings.style.apply(
+      color_gradient_row,
+      low = entryc2_df['Points'].min(), mean = avg_sum, high = entryc2_df['Points'].max(),
+      low_color = "#ddc399", mid_color = "#d9d9d9", high_color = "#e5cf87",
+      axis=1
+      ) 
+    return styled_standings
   
   group_list = ['Overall', 'Goshen', 'Champaign-Urbana', 'Harrisonburg', 'Alternate']
   #widgets.interact(view_standings, group=group_list);
@@ -622,7 +660,7 @@ else:
   # View individual brackets
   def elim_bkgnd(row): 
     if row.name == 0:
-      return [""]*len(row)
+      return ["font-weight: bold"]*len(row)
     if row["Name"] in elim_list:
       return ["background-color: #ffc2c2; text-decoration: line-through"]*len(row) # Style eliminated teams as light red
     else:
